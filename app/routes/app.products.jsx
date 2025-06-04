@@ -90,10 +90,10 @@ export const loader = async ({request}) => {
 export default function ProductsPage() {
   const { products, pageInfo, search } = useLoaderData();
   const [searchTerm, setSearchTerm] = useState(search || "");
-  console.log(products);
+
   
-  const firstcursor = products?.[0]?.cursor ?? "";
-  const lastCursor = products?.[products.length - 1]?.cursor ?? "";
+  const firstcursor = pageInfo?.startCursor ?? "";
+  const lastCursor = pageInfo?.endCursor ?? "";
 
 
   return (

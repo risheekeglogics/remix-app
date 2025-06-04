@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Note that some adapters may set a maximum length for the String type by default, please ensure your strings are long
+// enough when changing adapters.
+// See https://www.prisma.io/docs/orm/reference/prisma-schema-reference#string for more information
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root@localhost:3306/shopify_app"
+}
+
+
+
+
+model Session {
+  id            String   @id @db.VarChar(255)
+  shop          String   @db.VarChar(255)
+  state         String   @db.VarChar(255)
+  isOnline      Boolean  @default(false)
+  scope         String?  @db.VarChar(255)
+  expires       DateTime?
+  accessToken   String   @db.Text
+  userId        BigInt?
+  firstName     String?  @db.VarChar(255)
+  lastName      String?  @db.VarChar(255)
+  email         String?  @db.VarChar(255)
+  accountOwner  Boolean  @default(false)
+  locale        String?  @db.VarChar(255)
+  collaborator  Boolean? @default(false)
+  emailVerified Boolean? @default(false)
+}
+
+
+model ProductSuggestion {
+  id    Int    @id @default(autoincrement())
+  name  String
+  price String
+  createdAt DateTime @default(now())
+}
+
+
+model Product {
+  id    Int    @id @default(autoincrement())
+  name  String
+  price String
+}
